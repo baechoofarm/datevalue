@@ -5,7 +5,8 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production rollup --c rollup.config.js",
     "eslint": "eslint .",
-    "eslint-quiet-fix": "eslint . --quiet --fix"
+    "eslint-quiet-fix": "eslint . --quiet --fix",
+    "test": "jest"
   },
   "keywords": [],
   "main": "dist/index.js",
@@ -29,7 +30,6 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "cross-env": "^7.0.3",
     "@babel/cli": "^7.16.0",
     "@babel/core": "^7.16.0",
     "@babel/plugin-proposal-class-properties": "^7.16.0",
@@ -49,10 +49,14 @@
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "eslint": "^8.3.0",
-    "eslint-config-airbnb": "^19.0.0",
+    "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.3",
     "lodash": "^4.17.21",
-    "typescript": "^4.5.2"
+    "typescript": "^4.5.2",
+    "cross-env": "^7.0.3",
+    "jest": "^27.3.1",
+    "@types/jest": "^27.0.3",
+    "ts-jest": "^27.0.7"
   },
   "peerDependencies": {}
 }
