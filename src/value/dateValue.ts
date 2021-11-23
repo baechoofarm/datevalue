@@ -16,6 +16,14 @@ export class DateValue extends MonthValue {
         return this._d;
     }
 
+    dateDiff(value: DateValue) {
+        return DateValue.dateDiff(this, value);
+    }
+
+    toDateObj() {
+        return new Date(this.y, this.m, this.d);
+    }
+
     get d() {
         return this.getDate();
     }
@@ -30,5 +38,13 @@ export class DateValue extends MonthValue {
 
     set date(date: number) {
         this.setDate(date);
+    }
+
+    static dateDiff(value1: DateValue, value2: DateValue) {
+        const t1 = value1.dateObj.getTime();
+        const t2 = value2.dateObj.getTime();
+        const diff = Math.abs(t1 - t2);
+
+        return Math.floor(diff / 1000 / 60 / 60 / 24);
     }
 }
