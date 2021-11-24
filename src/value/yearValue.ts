@@ -92,6 +92,18 @@ export class YearValue {
         return this.dateObj.getTime();
     }
 
+    get isLeapYear() {
+        return YearValue.isLeapYear(this);
+    }
+
+    static isLeapYear(value: YearValue): boolean
+    static isLeapYear(year: number): boolean
+    static isLeapYear(v: YearValue | number): boolean
+    static isLeapYear(v: YearValue | number): boolean {
+        const y = typeof v === "number" ? v : v.y;
+        return ((y % 4 === 0) && (y % 100 !== 0)) || (y % 400 === 0);
+    }
+
     static yearDiff(value1: YearValue, value2: YearValue): number
     static yearDiff(value1: YearValue, year2: number): number
     static yearDiff(year1: number, value2: YearValue): number
