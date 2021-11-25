@@ -59,28 +59,28 @@ test('YearValue.compareYear()', () => {
     expect(v1.compareYear(v3)).toBe(-1);
 });
 
-test('YearValue.yearEquals()', () => {
+test('YearValue.equalsYear()', () => {
     const v1 = new YearValue(2021);
     const v2 = new YearValue(2021);
 
-    expect(YearValue.yearEquals(v1, v2)).toBeTruthy();
-    expect(YearValue.yearEquals(v1, 2021)).toBeTruthy();
-    expect(YearValue.yearEquals(v1, 1998)).toBeFalsy();
-    expect(YearValue.yearEquals(v1, 2024)).toBeFalsy();
+    expect(YearValue.equalsYear(v1, v2)).toBeTruthy();
+    expect(YearValue.equalsYear(v1, 2021)).toBeTruthy();
+    expect(YearValue.equalsYear(v1, 1998)).toBeFalsy();
+    expect(YearValue.equalsYear(v1, 2024)).toBeFalsy();
 
-    expect(v1.yearEquals(v2)).toBeTruthy();
-    expect(v1.yearEquals(2021)).toBeTruthy();
-    expect(v1.yearEquals(1998)).toBeFalsy();
-    expect(v1.yearEquals(2024)).toBeFalsy();
+    expect(v1.equalsYear(v2)).toBeTruthy();
+    expect(v1.equalsYear(2021)).toBeTruthy();
+    expect(v1.equalsYear(1998)).toBeFalsy();
+    expect(v1.equalsYear(2024)).toBeFalsy();
 });
 
-test('YearValue.yearGT()', () => {
+test('YearValue.gtYear()', () => {
     const v1 = new YearValue(2021);
     const v2 = new YearValue(2021);
     const v3 = new YearValue(1998);
     const v4 = new YearValue(2024);
 
-    expect(YearValue.yearGT(v1, v2)).toBeFalsy();
-    expect(YearValue.yearGT(v1, v3)).toBeTruthy();
-    expect(YearValue.yearGT(v1, v4)).toBeFalsy();
+    expect(YearValue.gtYear(v1, v2)).toBeFalsy();
+    expect(YearValue.gtYear(v1, v3)).toBeTruthy();
+    expect(YearValue.gtYear(v1, v4)).toBeFalsy();
 });

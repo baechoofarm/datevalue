@@ -30,39 +30,39 @@ export class MonthValue extends YearValue {
         return MonthValue.compareMonth(this, v1, v2);
     }
 
-    monthEquals(another: MonthValue): boolean
-    monthEquals(anotherYear: number, anotherMonth: number): boolean
-    monthEquals(v1: MonthValue | number, v2?: number): boolean
-    monthEquals(v1: MonthValue | number, v2?: number): boolean {
-        return MonthValue.monthEquals(this, v1, v2);
+    equalsMonth(another: MonthValue): boolean
+    equalsMonth(anotherYear: number, anotherMonth: number): boolean
+    equalsMonth(v1: MonthValue | number, v2?: number): boolean
+    equalsMonth(v1: MonthValue | number, v2?: number): boolean {
+        return MonthValue.equalsMonth(this, v1, v2);
     }
 
-    monthGT(another: MonthValue): boolean
-    monthGT(anotherYear: number, anotherMonth: number): boolean
-    monthGT(v1: MonthValue | number, v2?: number): boolean
-    monthGT(v1: MonthValue | number, v2?: number): boolean {
-        return MonthValue.monthGT(this, v1, v2);
+    gtMonth(another: MonthValue): boolean
+    gtMonth(anotherYear: number, anotherMonth: number): boolean
+    gtMonth(v1: MonthValue | number, v2?: number): boolean
+    gtMonth(v1: MonthValue | number, v2?: number): boolean {
+        return MonthValue.gtMonth(this, v1, v2);
     }
 
-    monthGTE(another: MonthValue): boolean
-    monthGTE(anotherYear: number, anotherMonth: number): boolean
-    monthGTE(v1: MonthValue | number, v2?: number): boolean
-    monthGTE(v1: MonthValue | number, v2?: number): boolean {
-        return MonthValue.monthGTE(this, v1, v2);
+    gteMonth(another: MonthValue): boolean
+    gteMonth(anotherYear: number, anotherMonth: number): boolean
+    gteMonth(v1: MonthValue | number, v2?: number): boolean
+    gteMonth(v1: MonthValue | number, v2?: number): boolean {
+        return MonthValue.gteMonth(this, v1, v2);
     }
 
-    monthLT(another: MonthValue): boolean
-    monthLT(anotherYear: number, anotherMonth: number): boolean
-    monthLT(v1: MonthValue | number, v2?: number): boolean
-    monthLT(v1: MonthValue | number, v2?: number): boolean {
-        return MonthValue.monthLT(this, v1, v2);
+    ltMonth(another: MonthValue): boolean
+    ltMonth(anotherYear: number, anotherMonth: number): boolean
+    ltMonth(v1: MonthValue | number, v2?: number): boolean
+    ltMonth(v1: MonthValue | number, v2?: number): boolean {
+        return MonthValue.ltMonth(this, v1, v2);
     }
 
-    monthLTE(another: MonthValue): boolean
-    monthLTE(anotherYear: number, anotherMonth: number): boolean
-    monthLTE(v1: MonthValue | number, v2?: number): boolean
-    monthLTE(v1: MonthValue | number, v2?: number): boolean {
-        return MonthValue.monthLTE(this, v1, v2);
+    lteMonth(another: MonthValue): boolean
+    lteMonth(anotherYear: number, anotherMonth: number): boolean
+    lteMonth(v1: MonthValue | number, v2?: number): boolean
+    lteMonth(v1: MonthValue | number, v2?: number): boolean {
+        return MonthValue.lteMonth(this, v1, v2);
     }
 
     toDateObj() {
@@ -160,48 +160,48 @@ export class MonthValue extends YearValue {
         return 0;
     }
 
-    static monthEquals(value1: MonthValue, value2: MonthValue): boolean
-    static monthEquals(value1: MonthValue, year2: number, month2: number): boolean
-    static monthEquals(year1: number, month1: number, value2: MonthValue): boolean
-    static monthEquals(year1: number, month1: number, year2: number, month2: number): boolean
-    static monthEquals(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): boolean
-    static monthEquals(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): boolean {
+    static equalsMonth(value1: MonthValue, value2: MonthValue): boolean
+    static equalsMonth(value1: MonthValue, year2: number, month2: number): boolean
+    static equalsMonth(year1: number, month1: number, value2: MonthValue): boolean
+    static equalsMonth(year1: number, month1: number, year2: number, month2: number): boolean
+    static equalsMonth(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): boolean
+    static equalsMonth(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): boolean {
         return MonthValue.compareMonth(v1, v2, v3, v4) === 0;
     }
 
-    static monthGT(value1: MonthValue, value2: MonthValue): boolean
-    static monthGT(value1: MonthValue, year2: number, month2: number): boolean
-    static monthGT(year1: number, month1: number, value2: MonthValue): boolean
-    static monthGT(year1: number, month1: number, year2: number, month2: number): boolean
-    static monthGT(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): boolean
-    static monthGT(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): boolean {
+    static gtMonth(value1: MonthValue, value2: MonthValue): boolean
+    static gtMonth(value1: MonthValue, year2: number, month2: number): boolean
+    static gtMonth(year1: number, month1: number, value2: MonthValue): boolean
+    static gtMonth(year1: number, month1: number, year2: number, month2: number): boolean
+    static gtMonth(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): boolean
+    static gtMonth(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): boolean {
         return MonthValue.compareMonth(v1, v2, v3, v4) === 1;
     }
 
-    static monthGTE(value1: MonthValue, value2: MonthValue): boolean
-    static monthGTE(value1: MonthValue, year2: number, month2: number): boolean
-    static monthGTE(year1: number, month1: number, value2: MonthValue): boolean
-    static monthGTE(year1: number, month1: number, year2: number, month2: number): boolean
-    static monthGTE(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): boolean
-    static monthGTE(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): boolean {
+    static gteMonth(value1: MonthValue, value2: MonthValue): boolean
+    static gteMonth(value1: MonthValue, year2: number, month2: number): boolean
+    static gteMonth(year1: number, month1: number, value2: MonthValue): boolean
+    static gteMonth(year1: number, month1: number, year2: number, month2: number): boolean
+    static gteMonth(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): boolean
+    static gteMonth(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): boolean {
         return MonthValue.compareMonth(v1, v2, v3, v4) >= 0;
     }
 
-    static monthLT(value1: MonthValue, value2: MonthValue): boolean
-    static monthLT(value1: MonthValue, year2: number, month2: number): boolean
-    static monthLT(year1: number, month1: number, value2: MonthValue): boolean
-    static monthLT(year1: number, month1: number, year2: number, month2: number): boolean
-    static monthLT(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): boolean
-    static monthLT(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): boolean {
+    static ltMonth(value1: MonthValue, value2: MonthValue): boolean
+    static ltMonth(value1: MonthValue, year2: number, month2: number): boolean
+    static ltMonth(year1: number, month1: number, value2: MonthValue): boolean
+    static ltMonth(year1: number, month1: number, year2: number, month2: number): boolean
+    static ltMonth(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): boolean
+    static ltMonth(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): boolean {
         return MonthValue.compareMonth(v1, v2, v3, v4) === -1;
     }
 
-    static monthLTE(value1: MonthValue, value2: MonthValue): boolean
-    static monthLTE(value1: MonthValue, year2: number, month2: number): boolean
-    static monthLTE(year1: number, month1: number, value2: MonthValue): boolean
-    static monthLTE(year1: number, month1: number, year2: number, month2: number): boolean
-    static monthLTE(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): boolean
-    static monthLTE(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): boolean {
+    static lteMonth(value1: MonthValue, value2: MonthValue): boolean
+    static lteMonth(value1: MonthValue, year2: number, month2: number): boolean
+    static lteMonth(year1: number, month1: number, value2: MonthValue): boolean
+    static lteMonth(year1: number, month1: number, year2: number, month2: number): boolean
+    static lteMonth(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): boolean
+    static lteMonth(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): boolean {
         return MonthValue.compareMonth(v1, v2, v3, v4) <= 0;
     }
 }

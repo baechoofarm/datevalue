@@ -29,39 +29,39 @@ export class YearValue {
         return YearValue.compareYear(this, another);
     }
 
-    yearEquals(another: YearValue): boolean
-    yearEquals(anotherYear: number): boolean
-    yearEquals(value: YearValue | number): boolean
-    yearEquals(value: YearValue | number): boolean {
-        return YearValue.yearEquals(this, value);
+    equalsYear(another: YearValue): boolean
+    equalsYear(anotherYear: number): boolean
+    equalsYear(value: YearValue | number): boolean
+    equalsYear(value: YearValue | number): boolean {
+        return YearValue.equalsYear(this, value);
     }
 
-    yearGT(another: YearValue): boolean
-    yearGT(anotherYear: number): boolean
-    yearGT(value: YearValue | number): boolean
-    yearGT(value: YearValue | number): boolean {
-        return YearValue.yearGT(this, value);
+    gtYear(another: YearValue): boolean
+    gtYear(anotherYear: number): boolean
+    gtYear(value: YearValue | number): boolean
+    gtYear(value: YearValue | number): boolean {
+        return YearValue.gtYear(this, value);
     }
 
-    yearGTE(another: YearValue): boolean
-    yearGTE(anotherYear: number): boolean
-    yearGTE(value: YearValue | number): boolean
-    yearGTE(value: YearValue | number): boolean {
-        return YearValue.yearGTE(this, value);
+    gteYear(another: YearValue): boolean
+    gteYear(anotherYear: number): boolean
+    gteYear(value: YearValue | number): boolean
+    gteYear(value: YearValue | number): boolean {
+        return YearValue.gteYear(this, value);
     }
 
-    yearLT(another: YearValue): boolean
-    yearLT(anotherYear: number): boolean
-    yearLT(value: YearValue | number): boolean
-    yearLT(value: YearValue | number): boolean {
-        return YearValue.yearLT(this, value);
+    ltYear(another: YearValue): boolean
+    ltYear(anotherYear: number): boolean
+    ltYear(value: YearValue | number): boolean
+    ltYear(value: YearValue | number): boolean {
+        return YearValue.ltYear(this, value);
     }
 
-    yearLTE(another: YearValue): boolean
-    yearLTE(anotherYear: number): boolean
-    yearLTE(value: YearValue | number): boolean
-    yearLTE(value: YearValue | number): boolean {
-        return YearValue.yearLTE(this, value);
+    lteYear(another: YearValue): boolean
+    lteYear(anotherYear: number): boolean
+    lteYear(value: YearValue | number): boolean
+    lteYear(value: YearValue | number): boolean {
+        return YearValue.lteYear(this, value);
     }
 
     toDateObj() {
@@ -130,48 +130,48 @@ export class YearValue {
         return 0;
     }
 
-    static yearEquals(value1: YearValue, value2: YearValue): boolean
-    static yearEquals(value1: YearValue, year2: number): boolean
-    static yearEquals(year1: number, value2: YearValue): boolean
-    static yearEquals(year1: number, year2: number): boolean
-    static yearEquals(v1: YearValue | number, v2: YearValue | number): boolean
-    static yearEquals(v1: YearValue | number, v2: YearValue | number): boolean {
+    static equalsYear(value1: YearValue, value2: YearValue): boolean
+    static equalsYear(value1: YearValue, year2: number): boolean
+    static equalsYear(year1: number, value2: YearValue): boolean
+    static equalsYear(year1: number, year2: number): boolean
+    static equalsYear(v1: YearValue | number, v2: YearValue | number): boolean
+    static equalsYear(v1: YearValue | number, v2: YearValue | number): boolean {
         return YearValue.compareYear(v1, v2) === 0;
     }
 
-    static yearGT(value1: YearValue, value2: YearValue): boolean
-    static yearGT(value1: YearValue, year2: number): boolean
-    static yearGT(year1: number, value2: YearValue): boolean
-    static yearGT(year1: number, year2: number): boolean
-    static yearGT(v1: YearValue | number, v2: YearValue | number): boolean
-    static yearGT(v1: YearValue | number, v2: YearValue | number): boolean {
+    static gtYear(value1: YearValue, value2: YearValue): boolean
+    static gtYear(value1: YearValue, year2: number): boolean
+    static gtYear(year1: number, value2: YearValue): boolean
+    static gtYear(year1: number, year2: number): boolean
+    static gtYear(v1: YearValue | number, v2: YearValue | number): boolean
+    static gtYear(v1: YearValue | number, v2: YearValue | number): boolean {
         return YearValue.compareYear(v1, v2) === 1;
     }
 
-    static yearGTE(value1: YearValue, value2: YearValue): boolean
-    static yearGTE(value1: YearValue, year2: number): boolean
-    static yearGTE(year1: number, value2: YearValue): boolean
-    static yearGTE(year1: number, year2: number): boolean
-    static yearGTE(v1: YearValue | number, v2: YearValue | number): boolean
-    static yearGTE(v1: YearValue | number, v2: YearValue | number): boolean {
+    static gteYear(value1: YearValue, value2: YearValue): boolean
+    static gteYear(value1: YearValue, year2: number): boolean
+    static gteYear(year1: number, value2: YearValue): boolean
+    static gteYear(year1: number, year2: number): boolean
+    static gteYear(v1: YearValue | number, v2: YearValue | number): boolean
+    static gteYear(v1: YearValue | number, v2: YearValue | number): boolean {
         return YearValue.compareYear(v1, v2) >= 0;
     }
 
-    static yearLT(value1: YearValue, value2: YearValue): boolean
-    static yearLT(value1: YearValue, year2: number): boolean
-    static yearLT(year1: number, value2: YearValue): boolean
-    static yearLT(year1: number, year2: number): boolean
-    static yearLT(v1: YearValue | number, v2: YearValue | number): boolean
-    static yearLT(v1: YearValue | number, v2: YearValue | number): boolean {
+    static ltYear(value1: YearValue, value2: YearValue): boolean
+    static ltYear(value1: YearValue, year2: number): boolean
+    static ltYear(year1: number, value2: YearValue): boolean
+    static ltYear(year1: number, year2: number): boolean
+    static ltYear(v1: YearValue | number, v2: YearValue | number): boolean
+    static ltYear(v1: YearValue | number, v2: YearValue | number): boolean {
         return YearValue.compareYear(v1, v2) === -1;
     }
 
-    static yearLTE(value1: YearValue, value2: YearValue): boolean
-    static yearLTE(value1: YearValue, year2: number): boolean
-    static yearLTE(year1: number, value2: YearValue): boolean
-    static yearLTE(year1: number, year2: number): boolean
-    static yearLTE(v1: YearValue | number, v2: YearValue | number): boolean
-    static yearLTE(v1: YearValue | number, v2: YearValue | number): boolean {
+    static lteYear(value1: YearValue, value2: YearValue): boolean
+    static lteYear(value1: YearValue, year2: number): boolean
+    static lteYear(year1: number, value2: YearValue): boolean
+    static lteYear(year1: number, year2: number): boolean
+    static lteYear(v1: YearValue | number, v2: YearValue | number): boolean
+    static lteYear(v1: YearValue | number, v2: YearValue | number): boolean {
         return YearValue.compareYear(v1, v2) <= 0;
     }
 }

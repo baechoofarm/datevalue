@@ -30,39 +30,39 @@ export class DateValue extends MonthValue {
         return DateValue.compareDate(this, v1, v2, v3);
     }
 
-    dateEquals(another: DateValue): boolean
-    dateEquals(anotherYear: number, anotherMonth: number, anotherDate: number): boolean
-    dateEquals(v1: DateValue | number, v2?: number, v3?: number): boolean
-    dateEquals(v1: DateValue | number, v2?: number, v3?: number): boolean {
-        return DateValue.dateEquals(this, v1, v2, v3);
+    equalsDate(another: DateValue): boolean
+    equalsDate(anotherYear: number, anotherMonth: number, anotherDate: number): boolean
+    equalsDate(v1: DateValue | number, v2?: number, v3?: number): boolean
+    equalsDate(v1: DateValue | number, v2?: number, v3?: number): boolean {
+        return DateValue.equalsDate(this, v1, v2, v3);
     }
 
-    dateGT(another: DateValue): boolean
-    dateGT(anotherYear: number, anotherMonth: number, anotherDate: number): boolean
-    dateGT(v1: DateValue | number, v2?: number, v3?: number): boolean
-    dateGT(v1: DateValue | number, v2?: number, v3?: number): boolean {
-        return DateValue.dateGT(this, v1, v2, v3);
+    gtDate(another: DateValue): boolean
+    gtDate(anotherYear: number, anotherMonth: number, anotherDate: number): boolean
+    gtDate(v1: DateValue | number, v2?: number, v3?: number): boolean
+    gtDate(v1: DateValue | number, v2?: number, v3?: number): boolean {
+        return DateValue.gtDate(this, v1, v2, v3);
     }
 
-    dateGTE(another: DateValue): boolean
-    dateGTE(anotherYear: number, anotherMonth: number, anotherDate: number): boolean
-    dateGTE(v1: DateValue | number, v2?: number, v3?: number): boolean
-    dateGTE(v1: DateValue | number, v2?: number, v3?: number): boolean {
-        return DateValue.dateGTE(this, v1, v2, v3);
+    gteDate(another: DateValue): boolean
+    gteDate(anotherYear: number, anotherMonth: number, anotherDate: number): boolean
+    gteDate(v1: DateValue | number, v2?: number, v3?: number): boolean
+    gteDate(v1: DateValue | number, v2?: number, v3?: number): boolean {
+        return DateValue.gteDate(this, v1, v2, v3);
     }
 
-    dateLT(another: DateValue): boolean
-    dateLT(anotherYear: number, anotherMonth: number, anotherDate: number): boolean
-    dateLT(v1: DateValue | number, v2?: number, v3?: number): boolean
-    dateLT(v1: DateValue | number, v2?: number, v3?: number): boolean {
-        return DateValue.dateLT(this, v1, v2, v3);
+    ltDate(another: DateValue): boolean
+    ltDate(anotherYear: number, anotherMonth: number, anotherDate: number): boolean
+    ltDate(v1: DateValue | number, v2?: number, v3?: number): boolean
+    ltDate(v1: DateValue | number, v2?: number, v3?: number): boolean {
+        return DateValue.ltDate(this, v1, v2, v3);
     }
 
-    dateLTE(another: DateValue): boolean
-    dateLTE(anotherYear: number, anotherMonth: number, anotherDate: number): boolean
-    dateLTE(v1: DateValue | number, v2?: number, v3?: number): boolean
-    dateLTE(v1: DateValue | number, v2?: number, v3?: number): boolean {
-        return DateValue.dateLTE(this, v1, v2, v3);
+    lteDate(another: DateValue): boolean
+    lteDate(anotherYear: number, anotherMonth: number, anotherDate: number): boolean
+    lteDate(v1: DateValue | number, v2?: number, v3?: number): boolean
+    lteDate(v1: DateValue | number, v2?: number, v3?: number): boolean {
+        return DateValue.lteDate(this, v1, v2, v3);
     }
 
     toDateObj() {
@@ -167,48 +167,48 @@ export class DateValue extends MonthValue {
         return 0;
     }
 
-    static dateEquals(value1: DateValue, value2: DateValue): boolean
-    static dateEquals(value1: DateValue, year2: number, month2: number, date2: number): boolean
-    static dateEquals(year1: number, month1: number, date1: number, value2: DateValue): boolean
-    static dateEquals(year1: number, month1: number, date1: number, year2: number, month2: number, date2: number): boolean
-    static dateEquals(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean
-    static dateEquals(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean {
+    static equalsDate(value1: DateValue, value2: DateValue): boolean
+    static equalsDate(value1: DateValue, year2: number, month2: number, date2: number): boolean
+    static equalsDate(year1: number, month1: number, date1: number, value2: DateValue): boolean
+    static equalsDate(year1: number, month1: number, date1: number, year2: number, month2: number, date2: number): boolean
+    static equalsDate(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean
+    static equalsDate(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean {
         return DateValue.compareDate(v1, v2, v3, v4, v5, v6) === 0;
     }
 
-    static dateGT(value1: DateValue, value2: DateValue): boolean
-    static dateGT(value1: DateValue, year2: number, month2: number, date2: number): boolean
-    static dateGT(year1: number, month1: number, date1: number, value2: DateValue): boolean
-    static dateGT(year1: number, month1: number, date1: number, year2: number, month2: number, date2: number): boolean
-    static dateGT(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean
-    static dateGT(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean {
+    static gtDate(value1: DateValue, value2: DateValue): boolean
+    static gtDate(value1: DateValue, year2: number, month2: number, date2: number): boolean
+    static gtDate(year1: number, month1: number, date1: number, value2: DateValue): boolean
+    static gtDate(year1: number, month1: number, date1: number, year2: number, month2: number, date2: number): boolean
+    static gtDate(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean
+    static gtDate(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean {
         return DateValue.compareDate(v1, v2, v3, v4, v5, v6) === 1;
     }
 
-    static dateGTE(value1: DateValue, value2: DateValue): boolean
-    static dateGTE(value1: DateValue, year2: number, month2: number, date2: number): boolean
-    static dateGTE(year1: number, month1: number, date1: number, value2: DateValue): boolean
-    static dateGTE(year1: number, month1: number, date1: number, year2: number, month2: number, date2: number): boolean
-    static dateGTE(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean
-    static dateGTE(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean {
+    static gteDate(value1: DateValue, value2: DateValue): boolean
+    static gteDate(value1: DateValue, year2: number, month2: number, date2: number): boolean
+    static gteDate(year1: number, month1: number, date1: number, value2: DateValue): boolean
+    static gteDate(year1: number, month1: number, date1: number, year2: number, month2: number, date2: number): boolean
+    static gteDate(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean
+    static gteDate(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean {
         return DateValue.compareDate(v1, v2, v3, v4, v5, v6) >= 0;
     }
 
-    static dateLT(value1: DateValue, value2: DateValue): boolean
-    static dateLT(value1: DateValue, year2: number, month2: number, date2: number): boolean
-    static dateLT(year1: number, month1: number, date1: number, value2: DateValue): boolean
-    static dateLT(year1: number, month1: number, date1: number, year2: number, month2: number, date2: number): boolean
-    static dateLT(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean
-    static dateLT(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean {
+    static ltDate(value1: DateValue, value2: DateValue): boolean
+    static ltDate(value1: DateValue, year2: number, month2: number, date2: number): boolean
+    static ltDate(year1: number, month1: number, date1: number, value2: DateValue): boolean
+    static ltDate(year1: number, month1: number, date1: number, year2: number, month2: number, date2: number): boolean
+    static ltDate(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean
+    static ltDate(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean {
         return DateValue.compareDate(v1, v2, v3, v4, v5, v6) === -1;
     }
 
-    static dateLTE(value1: DateValue, value2: DateValue): boolean
-    static dateLTE(value1: DateValue, year2: number, month2: number, date2: number): boolean
-    static dateLTE(year1: number, month1: number, date1: number, value2: DateValue): boolean
-    static dateLTE(year1: number, month1: number, date1: number, year2: number, month2: number, date2: number): boolean
-    static dateLTE(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean
-    static dateLTE(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean {
+    static lteDate(value1: DateValue, value2: DateValue): boolean
+    static lteDate(value1: DateValue, year2: number, month2: number, date2: number): boolean
+    static lteDate(year1: number, month1: number, date1: number, value2: DateValue): boolean
+    static lteDate(year1: number, month1: number, date1: number, year2: number, month2: number, date2: number): boolean
+    static lteDate(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean
+    static lteDate(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean {
         return DateValue.compareDate(v1, v2, v3, v4, v5, v6) <= 0;
     }
 }
