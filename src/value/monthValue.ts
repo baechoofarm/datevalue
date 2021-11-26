@@ -89,6 +89,28 @@ export class MonthValue extends YearValue {
         return MonthValue.monthIndex(this);
     }
 
+    get lastDateOfMonth() {
+        return MonthValue.lastDateOfMonth(this);
+    }
+
+    static lastDateOfMonth(value: MonthValue): number
+    static lastDateOfMonth(year: number, month: number): number
+    static lastDateOfMonth(v1: MonthValue | number, v2?: number): number
+    static lastDateOfMonth(v1: MonthValue | number, v2?: number): number {
+        let year = 1;
+        let month = 0;
+
+        if (typeof v1 === "number" && typeof v2 === "number") {
+            year = v1;
+            month = v2;
+        }
+        else if (typeof v1 !== "number") {
+            year = v1.y;
+            month = v1.m;
+        }
+        return new Date(year, month + 1, 0).getDate();
+    }
+
     static monthIndex(value: MonthValue): number
     static monthIndex(year: number, month: number): number
     static monthIndex(v1: MonthValue | number, v2?: number): number
