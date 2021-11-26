@@ -1,19 +1,36 @@
 import {CompareResult, YearValue} from "../internal";
 
 export class MonthValue extends YearValue {
-    protected _m: number;
+    protected _m!: number;
 
     constructor(year: number, month: number) {
         super(year);
-        this._m = month;
+        this.setMonth(month);
     }
 
     setMonth(month: number) {
-        this._m = month;
+        const d = new Date(this.year, month, 1);
+
+        this._y = d.getFullYear();
+        this._m = d.getMonth();
     }
 
     getMonth() {
         return this._m;
+    }
+
+    set(year: number): void
+    set(year: number, month: number): void
+    set(year: number, month?: number): void
+    set(year: number, month?: number): void {
+        if (typeof month === "number") {
+            const d = new Date(year, month, 1);
+
+            this._y = d.getFullYear();
+            this._m = d.getMonth();
+        } else {
+            super.set(year);
+        }
     }
 
     monthDiff(another: MonthValue): number
@@ -66,7 +83,7 @@ export class MonthValue extends YearValue {
     }
 
     toDateObj() {
-        return new Date(this.y, this.m, 1);
+        return new Date(this.year, this.month, 1);
     }
 
     get m() {

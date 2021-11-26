@@ -1,5 +1,15 @@
 import {YearValue} from "../src/internal";
 
+test('YearValue.set()', () => {
+    const v1 = new YearValue(2021);
+
+    v1.set(2050);
+
+    expect(v1.y).toBe(2050);
+    expect(v1.year).toBe(2050);
+    expect(v1.getYear()).toBe(2050);
+});
+
 test('YearValue.setYear()', () => {
     const v1 = new YearValue(2021);
 

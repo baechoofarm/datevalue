@@ -15,6 +15,10 @@ export class YearValue {
         return this._y;
     }
 
+    set(year: number) {
+        this.setYear(year);
+    }
+
     yearDiff(another: YearValue): number
     yearDiff(anotherYear: number): number
     yearDiff(value: YearValue | number): number
@@ -65,7 +69,7 @@ export class YearValue {
     }
 
     toDateObj() {
-        return new Date(this.y, 0, 1);
+        return new Date(this.year, 0, 1);
     }
 
     set y(year) {
