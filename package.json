@@ -1,6 +1,6 @@
 {
   "name": "datevalue",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.1",
   "description": "",
   "scripts": {
     "build": "cross-env NODE_ENV=production rollup --c rollup.config.js",
