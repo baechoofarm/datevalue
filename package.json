@@ -28,6 +28,10 @@
     "email": "byeonggeol98@gmail.com"
   },
   "license": "MIT",
+  "files": [
+    "dist",
+    "coverage"
+  ],
   "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.16.0",
