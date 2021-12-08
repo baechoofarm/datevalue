@@ -50,6 +50,22 @@ export class DateValue extends MonthValue {
         return new DateValue(this.year, this.month, this.date);
     }
 
+    prevYear(count: number = 1, ignoreDate: boolean = false) {
+        return new DateValue(this.year - count, this.month, ignoreDate ? 1 : this.date);
+    }
+
+    nextYear(count: number = 1, ignoreDate: boolean = false) {
+        return new DateValue(this.year + count, this.month, ignoreDate ? 1 : this.date);
+    }
+
+    prevMonth(count: number = 1, ignoreDate: boolean = false) {
+        return new DateValue(this.year, this.month - count, ignoreDate ? 1 : this.date);
+    }
+
+    nextMonth(count: number = 1, ignoreDate: boolean = false) {
+        return new DateValue(this.year, this.month + count, ignoreDate ? 1 : this.date)
+    }
+
     prevDate(count: number = 1) {
         return new DateValue(this.year, this.month, this.date - count);
     }
