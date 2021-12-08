@@ -1,1 +1,1 @@
-import "./internal";
+export * from "./internal";
