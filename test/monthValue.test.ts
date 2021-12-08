@@ -104,6 +104,24 @@ test('MonthValue.set()', () => {
     expect(v1.y).toBe(2022);
 });
 
+test('MonthValue.prevMonth()', () => {
+    const month = new MonthValue(2021, 10);
+
+    expect(month.prevMonth().year).toBe(2021);
+    expect(month.prevMonth().month).toBe(9);
+    expect(month.prevMonth(12).year).toBe(2020);
+    expect(month.prevMonth(12).month).toBe(10);
+});
+
+test('MonthValue.nextMonth()', () => {
+    const month = new MonthValue(2021, 10);
+
+    expect(month.nextMonth().year).toBe(2021);
+    expect(month.nextMonth().month).toBe(11);
+    expect(month.nextMonth(12).year).toBe(2022);
+    expect(month.nextMonth(12).month).toBe(10);
+});
+
 test('MonthValue.lastDateOfMonth()', () => {
     const v1 = new MonthValue(1998, 0);
     const v2 = new MonthValue(2021, 1);

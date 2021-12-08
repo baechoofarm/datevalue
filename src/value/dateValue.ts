@@ -50,6 +50,14 @@ export class DateValue extends MonthValue {
         return new DateValue(this.year, this.month, this.date);
     }
 
+    prevDate(count: number = 1) {
+        return new DateValue(this.year, this.month, this.date - count);
+    }
+
+    nextDate(count: number = 1) {
+        return new DateValue(this.year, this.month, this.date + count);
+    }
+
     dateDiff(another: DateValue): number
     dateDiff(anotherYear: number, anotherMonth: number, anotherDate: number): number
     dateDiff(v1: DateValue | number, v2?: number, v3?: number): number

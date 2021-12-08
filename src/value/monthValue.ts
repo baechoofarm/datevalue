@@ -40,6 +40,14 @@ export class MonthValue extends YearValue {
         return new MonthValue(this.year, this.month);
     }
 
+    prevMonth(count: number = 1) {
+        return new MonthValue(this.year, this.month - count);
+    }
+
+    nextMonth(count: number = 1) {
+        return new MonthValue(this.year, this.month + count);
+    }
+
     monthDiff(another: MonthValue): number
     monthDiff(anotherYear: number, anotherMonth: number): number
     monthDiff(v1: MonthValue | number, v2?: number): number

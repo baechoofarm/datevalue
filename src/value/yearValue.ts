@@ -26,6 +26,14 @@ export class YearValue {
         return new YearValue(this.year);
     }
 
+    prevYear(count: number = 1) {
+        return new YearValue(this.year - count);
+    }
+
+    nextYear(count: number = 1) {
+        return new YearValue(this.year + count);
+    }
+
     yearDiff(another: YearValue): number
     yearDiff(anotherYear: number): number
     yearDiff(value: YearValue | number): number

@@ -57,6 +57,18 @@ test('YearValue.time', () => {
     expect(t1).toBe(new Date(2021, 0, 1).getTime());
 });
 
+test('YearValue.prevYear()', () => {
+    const year = new YearValue(2021);
+
+    expect(year.prevYear().year).toBe(2020);
+});
+
+test('YearValue.nextYear()', () => {
+    const year = new YearValue(2021);
+
+    expect(year.nextYear().year).toBe(2022);
+});
+
 test('YearValue.isLeapYear()', () => {
     const v1 = new YearValue(2024);
     const v2 = new YearValue(2000);
