@@ -3,8 +3,11 @@ import {CompareResult} from "./compareResult";
 export class YearValue {
     protected _y: number;
 
-    constructor(year: number) {
-        this._y = year;
+    constructor()
+    constructor(year: number)
+    constructor(year?: number)
+    constructor(year?: number) {
+        this._y = year ?? new Date().getFullYear();
     }
 
     setYear(year: number) {
@@ -17,6 +20,10 @@ export class YearValue {
 
     set(year: number) {
         this.setYear(year);
+    }
+
+    clone() {
+        return new YearValue(this.year);
     }
 
     yearDiff(another: YearValue): number

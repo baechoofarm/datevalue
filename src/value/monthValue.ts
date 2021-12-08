@@ -3,9 +3,12 @@ import {CompareResult, YearValue} from "../internal";
 export class MonthValue extends YearValue {
     protected _m!: number;
 
-    constructor(year: number, month: number) {
+    constructor()
+    constructor(year: number, month: number)
+    constructor(year?: number, month?: number)
+    constructor(year?: number, month?: number) {
         super(year);
-        this.setMonth(month);
+        this.setMonth(month ?? new Date().getMonth());
     }
 
     setMonth(month: number) {
@@ -31,6 +34,10 @@ export class MonthValue extends YearValue {
         } else {
             super.set(year);
         }
+    }
+
+    clone() {
+        return new MonthValue(this.year, this.month);
     }
 
     monthDiff(another: MonthValue): number
@@ -100,6 +107,10 @@ export class MonthValue extends YearValue {
 
     set month(month: number) {
         this.setMonth(month);
+    }
+
+    get realMonth() {
+        return this.month + 1;
     }
 
     get monthIndex() {

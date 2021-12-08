@@ -41,6 +41,11 @@ test('MonthValue.constructor()', () => {
 
     expect(v6.y).toBe(2020);
     expect(v6.m).toBe(11);
+
+    const v7 = new MonthValue();
+
+    expect(v7.y).toBe(new Date().getFullYear());
+    expect(v7.m).toBe(new Date().getMonth());
 });
 
 test('MonthValue.setMonth()', () => {

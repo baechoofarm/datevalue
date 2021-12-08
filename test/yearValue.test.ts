@@ -1,5 +1,11 @@
 import {YearValue} from "../src/internal";
 
+test('YearValue.constructor()', () => {
+    const v1 = new YearValue();
+
+    expect(v1.year).toBe(new Date().getFullYear());
+});
+
 test('YearValue.set()', () => {
     const v1 = new YearValue(2021);
 
