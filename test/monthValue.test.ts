@@ -180,9 +180,6 @@ test('MonthValue.monthDiff()', () => {
     expect(MonthValue.monthDiff(v1, v1)).toBe(0);
     expect(MonthValue.monthDiff(v1, v2)).toBe(5);
 
-    // error case
-    expect(MonthValue.monthDiff(2021, 2022)).toBe(0);
-
     expect(v1.monthDiff(2022, 2)).toBe(5);
     expect(v2.monthDiff(2022, 2)).toBe(0);
     expect(v1.monthDiff(v2)).toBe(5);
