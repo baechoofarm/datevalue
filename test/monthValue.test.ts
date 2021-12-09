@@ -1,5 +1,20 @@
 import {MonthValue} from "../src/internal";
 
+test('MonthValue.constructor()', () => {
+    const v1 = new MonthValue();
+    const v2 = new MonthValue(2021);
+    const v3 = new MonthValue(2021, 11);
+
+    expect(v1.year).toBe(new Date().getFullYear());
+    expect(v1.month).toBe(new Date().getMonth());
+
+    expect(v2.year).toBe(2021);
+    expect(v2.month).toBe(0);
+
+    expect(v3.year).toBe(2021);
+    expect(v3.month).toBe(11);
+});
+
 test('MonthValue.toDateObject()', () => {
     const v1 = new MonthValue(2021, 10);
     const d1 = v1.toDateObj();

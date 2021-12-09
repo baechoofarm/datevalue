@@ -4,11 +4,16 @@ export class MonthValue extends YearValue {
     protected _m!: number;
 
     constructor()
+    constructor(year: number)
     constructor(year: number, month: number)
-    constructor(year?: number, month?: number)
     constructor(year?: number, month?: number) {
-        super(year);
-        this.setMonth(month ?? new Date().getMonth());
+        if (year === undefined) {
+            super();
+            this.setMonth(new Date().getMonth());
+        } else {
+            super(year);
+            this.setMonth(month ?? 0);
+        }
     }
 
     setMonth(month: number) {

@@ -1,5 +1,28 @@
 import {DateValue} from "../src/internal";
 
+test('DateValue.constructor()', () => {
+    const v1 = new DateValue();
+    const v2 = new DateValue(2021);
+    const v3 = new DateValue(2021, 11);
+    const v4 = new DateValue(2021, 11, 31);
+
+    expect(v1.year).toBe(new Date().getFullYear());
+    expect(v1.month).toBe(new Date().getMonth());
+    expect(v1.date).toBe(new Date().getDate());
+
+    expect(v2.year).toBe(2021);
+    expect(v2.month).toBe(0);
+    expect(v2.date).toBe(1);
+
+    expect(v3.year).toBe(2021);
+    expect(v3.month).toBe(11);
+    expect(v3.date).toBe(1);
+
+    expect(v4.year).toBe(2021);
+    expect(v4.month).toBe(11);
+    expect(v4.date).toBe(31);
+});
+
 test('DateValue.prevYear()', () => {
     const date = new DateValue(2024, 1, 29);
 
