@@ -214,8 +214,8 @@ export class MonthValue extends YearValue {
     static clampMonth(target: MonthValue, v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): MonthValue
     static clampMonth(target: MonthValue, v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): MonthValue {
         const [min, max] = MonthValue._monthArgs4(v1, v2, v3, v4);
-        if (target.ltYear(min)) return new MonthValue(min.year, min.month);
-        if (target.gtYear(max)) return new MonthValue(max.year, max.month);
+        if (target.ltMonth(min)) return new MonthValue(min.year, min.month);
+        if (target.gtMonth(max)) return new MonthValue(max.year, max.month);
         return target.clone();
     }
 

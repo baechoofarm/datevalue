@@ -230,8 +230,8 @@ export class DateValue extends MonthValue {
     static clampMonth(target: DateValue, v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): DateValue
     static clampMonth(target: DateValue, v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): DateValue {
         const [min, max] = MonthValue._monthArgs4(v1, v2, v3, v4);
-        if (target.ltYear(min)) return new DateValue(min.year, min.month, 1);
-        if (target.gtYear(max)) return new DateValue(max.year, max.month + 1, 0);
+        if (target.ltMonth(min)) return new DateValue(min.year, min.month, 1);
+        if (target.gtMonth(max)) return new DateValue(max.year, max.month + 1, 0);
         return target.clone();
     }
 
@@ -254,7 +254,7 @@ export class DateValue extends MonthValue {
     static isInDateRange(target: DateValue, v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean
     static isInDateRange(target: DateValue, v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean {
         const [min, max] = DateValue._dateArgs6(v1, v2, v3, v4, v5, v6);
-        return target.gteDate(min) && target.lteMonth(max);
+        return target.gteDate(min) && target.lteDate(max);
     }
 
     static dateIndex(value: DateValue): number
