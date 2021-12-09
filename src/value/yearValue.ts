@@ -34,6 +34,24 @@ export class YearValue {
         return new YearValue(this.year + count);
     }
 
+    clampYear(min: YearValue, max: YearValue): YearValue
+    clampYear(minYear: number, max: YearValue): YearValue
+    clampYear(min: YearValue, maxYear: number): YearValue
+    clampYear(minYear: number, maxYear: number): YearValue
+    clampYear(min: YearValue | number, max: YearValue | number): YearValue
+    clampYear(min: YearValue | number, max: YearValue | number): YearValue {
+        return YearValue.clampYear(this, min, max);
+    }
+
+    isInYearRange(min: YearValue, max: YearValue): boolean
+    isInYearRange(minYear: number, max: YearValue): boolean
+    isInYearRange(min: YearValue, maxYear: number): boolean
+    isInYearRange(minYear: number, maxYear: number): boolean
+    isInYearRange(min: YearValue | number, max: YearValue | number): boolean
+    isInYearRange(min: YearValue | number, max: YearValue | number): boolean {
+        return YearValue.isInYearRange(this, min, max);
+    }
+
     yearDiff(another: YearValue): number
     yearDiff(anotherYear: number): number
     yearDiff(value: YearValue | number): number
@@ -117,6 +135,26 @@ export class YearValue {
 
     static fromTime(time: number): YearValue {
         return new YearValue(new Date(time).getFullYear());
+    }
+
+    static clampYear(target: YearValue, min: YearValue, max: YearValue): YearValue
+    static clampYear(target: YearValue, minYear: number, max: YearValue): YearValue
+    static clampYear(target: YearValue, min: YearValue, maxYear: number): YearValue
+    static clampYear(target: YearValue, minYear: number, maxYear: number): YearValue
+    static clampYear(target: YearValue, min: YearValue | number, max: YearValue | number): YearValue
+    static clampYear(target: YearValue, min: YearValue | number, max: YearValue | number): YearValue {
+        if (target.ltYear(min)) return new YearValue(typeof min === 'number' ? min : min.year);
+        if (target.gtYear(max)) return new YearValue(typeof max === "number" ? max : max.year);
+        return target.clone();
+    }
+
+    static isInYearRange(target: YearValue, min: YearValue, max: YearValue): boolean
+    static isInYearRange(target: YearValue, minYear: number, max: YearValue): boolean
+    static isInYearRange(target: YearValue, min: YearValue, maxYear: number): boolean
+    static isInYearRange(target: YearValue, minYear: number, maxYear: number): boolean
+    static isInYearRange(target: YearValue, min: YearValue | number, max: YearValue | number): boolean
+    static isInYearRange(target: YearValue, min: YearValue | number, max: YearValue | number): boolean {
+        return target.gteYear(min) && target.lteYear(max);
     }
 
     static isLeapYear(value: YearValue): boolean

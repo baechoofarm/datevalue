@@ -1,4 +1,4 @@
-import {CompareResult, MonthValue} from "../internal";
+import {CompareResult, MonthValue, YearValue} from "../internal";
 
 export class DateValue extends MonthValue {
     protected _d!: number;
@@ -84,6 +84,42 @@ export class DateValue extends MonthValue {
         return new DateValue(this.year, this.month, this.date + count);
     }
 
+    clampYear(min: YearValue, max: YearValue): DateValue
+    clampYear(minYear: number, max: YearValue): DateValue
+    clampYear(min: YearValue, maxYear: number): DateValue
+    clampYear(minYear: number, maxYear: number): DateValue
+    clampYear(min: YearValue | number, max: YearValue | number): DateValue
+    clampYear(min: YearValue | number, max: YearValue | number): DateValue  {
+        return DateValue.clampYear(this, min, max);
+    }
+
+    clampMonth(min: MonthValue, max: MonthValue): DateValue
+    clampMonth(min: MonthValue, maxYear: number, maxMonth: number): DateValue
+    clampMonth(minYear: number, minMonth: number, max: MonthValue): DateValue
+    clampMonth(minYear: number, minMonth: number, maxYear: number, maxMonth: number): DateValue
+    clampMonth(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): DateValue
+    clampMonth(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): DateValue {
+        return DateValue.clampMonth(this, v1, v2, v3, v4);
+    }
+
+    clampDate(min: DateValue, max: DateValue): DateValue
+    clampDate(min: DateValue, maxYear: number, maxMonth: number, maxDate: number): DateValue
+    clampDate(minYear: number, minMonth: number, minDate: number, value2: DateValue): DateValue
+    clampDate(minYear: number, minMonth: number, minDate: number, maxYear: number, maxMonth: number, maxDate: number): DateValue
+    clampDate(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): DateValue
+    clampDate(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): DateValue {
+        return DateValue.clampDate(this, v1, v2, v3, v4, v5, v6);
+    }
+
+    isInDateRange(min: DateValue, max: DateValue): boolean
+    isInDateRange(min: DateValue, maxYear: number, maxMonth: number, maxDate: number): boolean
+    isInDateRange(minYear: number, minMonth: number, minDate: number, value2: DateValue): boolean
+    isInDateRange(minYear: number, minMonth: number, minDate: number, maxYear: number, maxMonth: number, maxDate: number): boolean
+    isInDateRange(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean
+    isInDateRange(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean {
+        return DateValue.isInDateRange(this, v1, v2, v3, v4, v5, v6);
+    }
+
     dateDiff(another: DateValue): number
     dateDiff(anotherYear: number, anotherMonth: number, anotherDate: number): number
     dateDiff(v1: DateValue | number, v2?: number, v3?: number): number
@@ -162,6 +198,65 @@ export class DateValue extends MonthValue {
         return new DateValue(d.getFullYear(), d.getMonth(), d.getDate());
     }
 
+    private static _dateArgs6(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): [DateValue, DateValue] {
+        if (typeof v1 === "number" && typeof v2 === "number" && typeof v3 === "number") {
+            return [
+                new DateValue(v1, v2, v3),
+                (typeof v4 === "number" && typeof v5 === "number" && typeof v6 === "number") ? new DateValue(v4, v5, v6) : (v4 as DateValue)
+            ];
+        } else {
+            return [
+                v1 as DateValue,
+                (typeof v2 === "number" && typeof v3 === "number" && typeof v4 === "number") ? new DateValue(v2, v3, v4) : (v2 as DateValue)
+            ];
+        }
+    }
+
+    static clampYear(target: DateValue, min: YearValue, max: YearValue): DateValue
+    static clampYear(target: DateValue, minYear: number, max: YearValue): DateValue
+    static clampYear(target: DateValue, min: YearValue, maxYear: number): DateValue
+    static clampYear(target: DateValue, minYear: number, maxYear: number): DateValue
+    static clampYear(target: DateValue, min: YearValue | number, max: YearValue | number): DateValue
+    static clampYear(target: DateValue, min: YearValue | number, max: YearValue | number): DateValue  {
+        if (target.ltYear(min)) return new DateValue(typeof min === 'number' ? min : min.year, 0, 1);
+        if (target.gtYear(max)) return new DateValue(typeof max === 'number' ? max : max.year, 11, 31);
+        return target.clone();
+    }
+
+    static clampMonth(target: DateValue, min: MonthValue, max: MonthValue): DateValue
+    static clampMonth(target: DateValue, min: MonthValue, maxYear: number, maxMonth: number): DateValue
+    static clampMonth(target: DateValue, minYear: number, minMonth: number, max: MonthValue): DateValue
+    static clampMonth(target: DateValue, minYear: number, minMonth: number, maxYear: number, maxMonth: number): DateValue
+    static clampMonth(target: DateValue, v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): DateValue
+    static clampMonth(target: DateValue, v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): DateValue {
+        const [min, max] = MonthValue._monthArgs4(v1, v2, v3, v4);
+        if (target.ltYear(min)) return new DateValue(min.year, min.month, 1);
+        if (target.gtYear(max)) return new DateValue(max.year, max.month + 1, 0);
+        return target.clone();
+    }
+
+    static clampDate(target: DateValue, min: DateValue, max: DateValue): DateValue
+    static clampDate(target: DateValue, min: DateValue, maxYear: number, maxMonth: number, maxDate: number): DateValue
+    static clampDate(target: DateValue, minYear: number, minMonth: number, minDate: number, value2: DateValue): DateValue
+    static clampDate(target: DateValue, minYear: number, minMonth: number, minDate: number, maxYear: number, maxMonth: number, maxDate: number): DateValue
+    static clampDate(target: DateValue, v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): DateValue
+    static clampDate(target: DateValue, v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): DateValue {
+        const [min, max] = DateValue._dateArgs6(v1, v2, v3, v4, v5, v6);
+        if (target.ltDate(min)) return new DateValue(min.year, min.month, min.date);
+        if (target.gtDate(max)) return new DateValue(max.year, max.month, max.date);
+        return target.clone();
+    }
+
+    static isInDateRange(target: DateValue, min: DateValue, max: DateValue): boolean
+    static isInDateRange(target: DateValue, min: DateValue, maxYear: number, maxMonth: number, maxDate: number): boolean
+    static isInDateRange(target: DateValue, minYear: number, minMonth: number, minDate: number, value2: DateValue): boolean
+    static isInDateRange(target: DateValue, minYear: number, minMonth: number, minDate: number, maxYear: number, maxMonth: number, maxDate: number): boolean
+    static isInDateRange(target: DateValue, v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean
+    static isInDateRange(target: DateValue, v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): boolean {
+        const [min, max] = DateValue._dateArgs6(v1, v2, v3, v4, v5, v6);
+        return target.gteDate(min) && target.lteMonth(max);
+    }
+
     static dateIndex(value: DateValue): number
     static dateIndex(year: number, month: number, date: number): number
     static dateIndex(v1: DateValue | number, v2?: number, v3?: number): number
@@ -188,23 +283,8 @@ export class DateValue extends MonthValue {
     static dateDiff(year1: number, month1: number, date1: number, year2: number, month2: number, date2: number): number
     static dateDiff(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): number
     static dateDiff(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): number {
-        if (typeof v1 === "number" && typeof v2 === "number" && typeof v3 === "number") {
-            if (typeof v4 === "number" && typeof v5 === "number" && typeof v6 === "number") {
-                return Math.abs(DateValue.dateIndex(v1, v2, v3) - DateValue.dateIndex(v4, v5, v6));
-            }
-            if (v4 && typeof v4 !== "number") {
-                return Math.abs(DateValue.dateIndex(v1, v2, v3) - DateValue.dateIndex(v4));
-            }
-        }
-        if (typeof v1 !== "number") {
-            if (typeof v2 === "number" && typeof v3 === "number" && typeof v4 === "number") {
-                return Math.abs(DateValue.dateIndex(v1) - DateValue.dateIndex(v2, v3, v4));
-            }
-            if (v2 && typeof v2 !== "number") {
-                return Math.abs(DateValue.dateIndex(v1) - DateValue.dateIndex(v2));
-            }
-        }
-        return 0;
+        const [a, b] = DateValue._dateArgs6(v1, v2, v3, v4, v5, v6);
+        return Math.abs(DateValue.dateIndex(a) - DateValue.dateIndex(b));
     }
 
     static compareDate(value1: DateValue, value2: DateValue): CompareResult
@@ -213,27 +293,9 @@ export class DateValue extends MonthValue {
     static compareDate(year1: number, month1: number, date1: number, year2: number, month2: number, date2: number): CompareResult
     static compareDate(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): CompareResult
     static compareDate(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): CompareResult {
-        let d1 = 0;
-        let d2 = 0;
-
-        if (typeof v1 === "number" && typeof v2 === "number" && typeof v3 === "number") {
-            d1 = DateValue.dateIndex(v1, v2, v3);
-            if (typeof v4 === "number" && typeof v5 === "number" && typeof v6 === "number") {
-                d2 = DateValue.dateIndex(v4, v5, v6);
-            }
-            if (v4 && typeof v4 !== "number") {
-                d2 = DateValue.dateIndex(v4);
-            }
-        }
-        if (typeof v1 !== "number") {
-            d1 = DateValue.dateIndex(v1);
-            if (typeof v2 === "number" && typeof v3 === "number" && typeof v4 === "number") {
-                d2 = DateValue.dateIndex(v2, v3, v4);
-            }
-            if (v2 && typeof v2 !== "number") {
-                d2 = DateValue.dateIndex(v2);
-            }
-        }
+        const [a, b] = DateValue._dateArgs6(v1, v2, v3, v4, v5, v6);
+        let d1 = DateValue.dateIndex(a);
+        let d2 = DateValue.dateIndex(b);
 
         if (d1 < d2) return -1;
         if (d1 > d2) return 1;

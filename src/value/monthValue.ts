@@ -61,6 +61,33 @@ export class MonthValue extends YearValue {
         return new MonthValue(this.year, this.month + count);
     }
 
+    clampYear(min: YearValue, max: YearValue): MonthValue
+    clampYear(minYear: number, max: YearValue): MonthValue
+    clampYear(min: YearValue, maxYear: number): MonthValue
+    clampYear(minYear: number, maxYear: number): MonthValue
+    clampYear(min: YearValue | number, max: YearValue | number): MonthValue
+    clampYear(min: YearValue | number, max: YearValue | number): MonthValue  {
+        return MonthValue.clampYear(this, min, max);
+    }
+
+    clampMonth(min: MonthValue, max: MonthValue): MonthValue
+    clampMonth(min: MonthValue, maxYear: number, maxMonth: number): MonthValue
+    clampMonth(minYear: number, minMonth: number, max: MonthValue): MonthValue
+    clampMonth(minYear: number, minMonth: number, maxYear: number, maxMonth: number): MonthValue
+    clampMonth(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): MonthValue
+    clampMonth(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): MonthValue {
+        return MonthValue.clampMonth(this, v1, v2, v3, v4);
+    }
+
+    isInMonthRange(min: MonthValue, max: MonthValue): boolean
+    isInMonthRange(min: MonthValue, maxYear: number, maxMonth: number): boolean
+    isInMonthRange(minYear: number, minMonth: number, max: MonthValue): boolean
+    isInMonthRange(minYear: number, minMonth: number, maxYear: number, maxMonth: number): boolean
+    isInMonthRange(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): boolean
+    isInMonthRange(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): boolean {
+        return MonthValue.isInMonthRange(this, v1, v2, v3, v4);
+    }
+
     monthDiff(another: MonthValue): number
     monthDiff(anotherYear: number, anotherMonth: number): number
     monthDiff(v1: MonthValue | number, v2?: number): number
@@ -147,21 +174,66 @@ export class MonthValue extends YearValue {
         return new MonthValue(d.getFullYear(), d.getMonth());
     }
 
+    static _monthArgs2(v1: MonthValue | number, v2?: number): [number, number] {
+        if (typeof v1 === "number" && typeof v2 === "number") {
+            return [v1, v2]
+        }
+        const {year, month} = v1 as MonthValue;
+        return [year, month];
+    }
+
+    static _monthArgs4(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): [MonthValue, MonthValue] {
+        if (typeof v1 === "number" && typeof v2 === "number") {
+            return [
+                new MonthValue(v1, v2),
+                (typeof v3 === "number" && typeof v4 === "number") ? new MonthValue(v3, v4) : (v3 as MonthValue)
+            ];
+        } else {
+            return [
+                v1 as MonthValue,
+                (typeof v2 === "number" && typeof v3 === "number") ? new MonthValue(v2, v3) : (v2 as MonthValue)
+            ];
+        }
+    }
+
+    static clampYear(target: MonthValue, min: YearValue, max: YearValue): MonthValue
+    static clampYear(target: MonthValue, minYear: number, max: YearValue): MonthValue
+    static clampYear(target: MonthValue, min: YearValue, maxYear: number): MonthValue
+    static clampYear(target: MonthValue, minYear: number, maxYear: number): MonthValue
+    static clampYear(target: MonthValue, min: YearValue | number, max: YearValue | number): MonthValue
+    static clampYear(target: MonthValue, min: YearValue | number, max: YearValue | number): MonthValue  {
+        if (target.ltYear(min)) return new MonthValue(typeof min === 'number' ? min : min.year, 0);
+        if (target.gtYear(max)) return new MonthValue(typeof max === 'number' ? max : max.year, 11);
+        return target.clone();
+    }
+
+    static clampMonth(target: MonthValue, min: MonthValue, max: MonthValue): MonthValue
+    static clampMonth(target: MonthValue, min: MonthValue, maxYear: number, maxMonth: number): MonthValue
+    static clampMonth(target: MonthValue, minYear: number, minMonth: number, max: MonthValue): MonthValue
+    static clampMonth(target: MonthValue, minYear: number, minMonth: number, maxYear: number, maxMonth: number): MonthValue
+    static clampMonth(target: MonthValue, v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): MonthValue
+    static clampMonth(target: MonthValue, v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): MonthValue {
+        const [min, max] = MonthValue._monthArgs4(v1, v2, v3, v4);
+        if (target.ltYear(min)) return new MonthValue(min.year, min.month);
+        if (target.gtYear(max)) return new MonthValue(max.year, max.month);
+        return target.clone();
+    }
+
+    static isInMonthRange(target: MonthValue, min: MonthValue, max: MonthValue): boolean
+    static isInMonthRange(target: MonthValue, min: MonthValue, maxYear: number, maxMonth: number): boolean
+    static isInMonthRange(target: MonthValue, minYear: number, minMonth: number, max: MonthValue): boolean
+    static isInMonthRange(target: MonthValue, minYear: number, minMonth: number, maxYear: number, maxMonth: number): boolean
+    static isInMonthRange(target: MonthValue, v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): boolean
+    static isInMonthRange(target: MonthValue, v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): boolean {
+        const [min, max] = MonthValue._monthArgs4(v1, v2, v3, v4);
+        return target.gteMonth(min) && target.lteMonth(max);
+    }
+
     static lastDateOfMonth(value: MonthValue): number
     static lastDateOfMonth(year: number, month: number): number
     static lastDateOfMonth(v1: MonthValue | number, v2?: number): number
     static lastDateOfMonth(v1: MonthValue | number, v2?: number): number {
-        let year = 1;
-        let month = 0;
-
-        if (typeof v1 === "number" && typeof v2 === "number") {
-            year = v1;
-            month = v2;
-        }
-        else if (typeof v1 !== "number") {
-            year = v1.y;
-            month = v1.m;
-        }
+        const [year, month] = MonthValue._monthArgs2(v1, v2);
         return new Date(year, month + 1, 0).getDate();
     }
 
@@ -169,13 +241,8 @@ export class MonthValue extends YearValue {
     static monthIndex(year: number, month: number): number
     static monthIndex(v1: MonthValue | number, v2?: number): number
     static monthIndex(v1: MonthValue | number, v2?: number): number {
-        if (typeof v1 !== "number") {
-            return (v1.y - 1) * 12 + v1.m;
-        }
-        if (typeof v2 === "number") {
-            return (v1 - 1) * 12 + v2;
-        }
-        return (v1 - 1) * 12;
+        const [year, month] = MonthValue._monthArgs2(v1, v2);
+        return (year - 1) * 12 + month;
     }
 
     static monthDiff(value1: MonthValue, value2: MonthValue): number
@@ -184,23 +251,8 @@ export class MonthValue extends YearValue {
     static monthDiff(year1: number, month1: number, year2: number, month2: number): number
     static monthDiff(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): number
     static monthDiff(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): number {
-        if (typeof v1 === 'number' && typeof v2 === 'number') {
-            if (typeof v3 === 'number' && typeof v4 === 'number') {
-                return Math.abs(MonthValue.monthIndex(v1, v2) - MonthValue.monthIndex(v3, v4));
-            }
-            if (v3 && typeof v3 !== 'number') {
-                return Math.abs(MonthValue.monthIndex(v1, v2) - MonthValue.monthIndex(v3));
-            }
-        }
-        if (v1 && typeof v1 !== 'number') {
-            if (typeof v2 === 'number' && typeof v3 === 'number') {
-                return Math.abs(MonthValue.monthIndex(v1) - MonthValue.monthIndex(v2, v3));
-            }
-            if (v2 && typeof v2 !== 'number') {
-                return Math.abs(MonthValue.monthIndex(v1) - MonthValue.monthIndex(v2));
-            }
-        }
-        return 0;
+        const [a, b] = MonthValue._monthArgs4(v1, v2, v3, v4);
+        return Math.abs(MonthValue.monthIndex(a) - MonthValue.monthIndex(b));
     }
 
     static compareMonth(value1: MonthValue, value2: MonthValue): CompareResult
@@ -209,27 +261,9 @@ export class MonthValue extends YearValue {
     static compareMonth(year1: number, month1: number, year2: number, month2: number): CompareResult
     static compareMonth(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): CompareResult
     static compareMonth(v1: MonthValue | number, v2: MonthValue | number, v3?: MonthValue | number, v4?: number): CompareResult {
-        let m1 = 0;
-        let m2 = 0;
-
-        if (typeof v1 === 'number' && typeof v2 === 'number') {
-            m1 = MonthValue.monthIndex(v1, v2);
-            if (typeof v3 === 'number' && typeof v4 === 'number') {
-                m2 = MonthValue.monthIndex(v3, v4);
-            }
-            if (v3 && typeof v3 !== 'number') {
-                m2 = MonthValue.monthIndex(v3);
-            }
-        }
-        if (v1 && typeof v1 !== 'number') {
-            m1 = MonthValue.monthIndex(v1);
-            if (typeof v2 === 'number' && typeof v3 === 'number') {
-                m2 = MonthValue.monthIndex(v2, v3);
-            }
-            if (v2 && typeof v2 !== 'number') {
-                m2 = MonthValue.monthIndex(v2);
-            }
-        }
+        const [a, b] = MonthValue._monthArgs4(v1, v2, v3, v4);
+        const m1 = MonthValue.monthIndex(a);
+        const m2 = MonthValue.monthIndex(b);
 
         if (m1 < m2) return -1;
         if (m1 > m2) return 1;
