@@ -142,6 +142,11 @@ export class MonthValue extends YearValue {
         return MonthValue.lastDateOfMonth(this);
     }
 
+    static fromTime(time: number): MonthValue {
+        const d = new Date(time);
+        return new MonthValue(d.getFullYear(), d.getMonth());
+    }
+
     static lastDateOfMonth(value: MonthValue): number
     static lastDateOfMonth(year: number, month: number): number
     static lastDateOfMonth(v1: MonthValue | number, v2?: number): number

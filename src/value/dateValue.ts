@@ -157,6 +157,11 @@ export class DateValue extends MonthValue {
         return DateValue.dateIndex(this);
     }
 
+    static fromTime(time: number): DateValue {
+        const d = new Date(time);
+        return new DateValue(d.getFullYear(), d.getMonth(), d.getDate());
+    }
+
     static dateIndex(value: DateValue): number
     static dateIndex(year: number, month: number, date: number): number
     static dateIndex(v1: DateValue | number, v2?: number, v3?: number): number

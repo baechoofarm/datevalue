@@ -115,6 +115,10 @@ export class YearValue {
         return YearValue.isLeapYear(this);
     }
 
+    static fromTime(time: number): YearValue {
+        return new YearValue(new Date(time).getFullYear());
+    }
+
     static isLeapYear(value: YearValue): boolean
     static isLeapYear(year: number): boolean
     static isLeapYear(v: YearValue | number): boolean
