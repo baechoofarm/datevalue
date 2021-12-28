@@ -36,6 +36,30 @@ export class WeekValue extends MonthValue {
         return this._w;
     }
 
+    prevYear(count: number = 1) {
+        return new WeekValue(this.year - count, this.month, this.week);
+    }
+
+    nextYear(count: number = 1) {
+        return new WeekValue(this.year + count, this.month, this.week);
+    }
+
+    prevMonth(count: number = 1) {
+        return new WeekValue(this.year, this.month - count, this.week);
+    }
+
+    nextMonth(count: number = 1) {
+        return new WeekValue(this.year, this.month + count, this.week);
+    }
+
+    prevWeek(count: number = 1) {
+        return new WeekValue(this.year, this.month, this.week - count);
+    }
+
+    nextWeek(count: number = 1) {
+        return new WeekValue(this.year, this.month, this.week + count);
+    }
+
     toDateObj(): Date {
         return this.startDateOfWeek.dateObj;
     }
