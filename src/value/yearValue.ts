@@ -1,7 +1,9 @@
 import {CompareResult} from "./compareResult";
+import {Day} from "./day";
 
 export class YearValue {
     protected _y: number;
+    protected _startDayOfWeek = Day.SUN;
 
     constructor()
     constructor(year: number)
@@ -32,6 +34,10 @@ export class YearValue {
 
     nextYear(count: number = 1) {
         return new YearValue(this.year + count);
+    }
+
+    setStartDayOfWeek(startDayOfWeek: Day) {
+        this._startDayOfWeek = startDayOfWeek;
     }
 
     clampYear(min: YearValue, max: YearValue): YearValue
@@ -133,8 +139,20 @@ export class YearValue {
         return YearValue.isLeapYear(this);
     }
 
+    set startDayOfWeek(startDayOfWeek) {
+        this.setStartDayOfWeek(startDayOfWeek);
+    }
+
+    get startDayOfWeek() {
+        return this._startDayOfWeek;
+    }
+
     static fromTime(time: number): YearValue {
         return new YearValue(new Date(time).getFullYear());
+    }
+
+    static fromDateObj(obj: Date): YearValue {
+        return new YearValue(obj.getFullYear());
     }
 
     static clampYear(target: YearValue, min: YearValue, max: YearValue): YearValue

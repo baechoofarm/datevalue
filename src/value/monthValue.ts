@@ -174,6 +174,10 @@ export class MonthValue extends YearValue {
         return new MonthValue(d.getFullYear(), d.getMonth());
     }
 
+    static fromDateObj(obj: Date): MonthValue {
+        return new MonthValue(obj.getFullYear(), obj.getMonth());
+    }
+
     static _monthArgs2(v1: MonthValue | number, v2?: number): [number, number] {
         if (typeof v1 === "number" && typeof v2 === "number") {
             return [v1, v2]

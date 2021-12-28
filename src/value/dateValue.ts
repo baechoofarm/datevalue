@@ -1,4 +1,4 @@
-import {CompareResult, MonthValue, YearValue} from "../internal";
+import {CompareResult, Day, MonthValue, WeekValue, YearValue} from "../internal";
 
 export class DateValue extends MonthValue {
     protected _d!: number;
@@ -29,8 +29,16 @@ export class DateValue extends MonthValue {
         this._d = d.getDate();
     }
 
+    addDate(date: number) {
+        this.setDate(this.date + date);
+    }
+
     getDate() {
         return this._d;
+    }
+
+    getDay(): Day {
+        return this.toDateObj().getDay();
     }
 
     setMonth(month: number) {
@@ -89,7 +97,7 @@ export class DateValue extends MonthValue {
     clampYear(min: YearValue, maxYear: number): DateValue
     clampYear(minYear: number, maxYear: number): DateValue
     clampYear(min: YearValue | number, max: YearValue | number): DateValue
-    clampYear(min: YearValue | number, max: YearValue | number): DateValue  {
+    clampYear(min: YearValue | number, max: YearValue | number): DateValue {
         return DateValue.clampYear(this, min, max);
     }
 
@@ -189,13 +197,33 @@ export class DateValue extends MonthValue {
         this.setDate(date);
     }
 
+    get day() {
+        return this.getDay();
+    }
+
     get dateIndex() {
         return DateValue.dateIndex(this);
+    }
+
+    get week() {
+        return WeekValue.fromDate(this).week;
+    }
+
+    get startDateOfWeek() {
+        return WeekValue.startDateOfDateWeek(this);
+    }
+
+    get endDateOfWeek() {
+        return WeekValue.endDateOfDateWeek(this);
     }
 
     static fromTime(time: number): DateValue {
         const d = new Date(time);
         return new DateValue(d.getFullYear(), d.getMonth(), d.getDate());
+    }
+
+    static fromDateObj(obj: Date): DateValue {
+        return new DateValue(obj.getFullYear(), obj.getMonth(), obj.getDate());
     }
 
     private static _dateArgs6(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): [DateValue, DateValue] {
@@ -217,7 +245,7 @@ export class DateValue extends MonthValue {
     static clampYear(target: DateValue, min: YearValue, maxYear: number): DateValue
     static clampYear(target: DateValue, minYear: number, maxYear: number): DateValue
     static clampYear(target: DateValue, min: YearValue | number, max: YearValue | number): DateValue
-    static clampYear(target: DateValue, min: YearValue | number, max: YearValue | number): DateValue  {
+    static clampYear(target: DateValue, min: YearValue | number, max: YearValue | number): DateValue {
         if (target.ltYear(min)) return new DateValue(typeof min === 'number' ? min : min.year, 0, 1);
         if (target.gtYear(max)) return new DateValue(typeof max === 'number' ? max : max.year, 11, 31);
         return target.clone();
@@ -265,8 +293,7 @@ export class DateValue extends MonthValue {
 
         if (typeof v1 === "number" && typeof v2 === "number" && typeof v3 === "number") {
             d = new Date(v1, v2, v3);
-        }
-        if (v1 && typeof v1 !== "number") {
+        } else if (v1 && typeof v1 !== "number") {
             d = v1.dateObj;
         }
         if (d) {
