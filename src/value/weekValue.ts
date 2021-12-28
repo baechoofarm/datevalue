@@ -20,16 +20,17 @@ export class WeekValue extends MonthValue {
     }
 
     setWeek(week: number) {
-        const first = WeekValue.firstWeekOfMonth(this.y, this.m, this.startDayOfWeek);
-        const startDate = first.startDateOfWeek;
+        const startDate = WeekValue.startDateOfWeek(this.y, this.m, 1, this.startDayOfWeek);
 
         startDate.date += (week - 1) * 7;
 
-        const {y, m, w} = WeekValue.fromDate(startDate);
+        const start = WeekValue.startDateOfDateWeek(startDate);
+        const first = WeekValue.startDateOfDateWeek(startDate.y, startDate.m, 1, startDate.startDayOfWeek);
+        const w = Math.ceil(start.dateDiff(first) / 7) + 1;
 
-        this.y = y;
-        this.m = m;
-        this.w = w;
+        this._y = startDate.y;
+        this._m = startDate.m;
+        this._w = w;
     }
 
     getWeek() {
