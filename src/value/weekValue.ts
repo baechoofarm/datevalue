@@ -28,8 +28,9 @@ export class WeekValue extends MonthValue {
         let month: number = this.m;
 
         if (week >= 1) {
+            const firstDate = WeekValue.startDateOfDateWeek(this.y, this.m, 1, this.startDayOfWeek);
             const lastDate = WeekValue.startDateOfDateWeek(this.y, this.m, MonthValue.lastDateOfMonth(this), this.startDayOfWeek);
-            const lastWeek = lastDate.week;
+            const lastWeek = Math.floor(lastDate.dateDiff(firstDate) / 7) + 1;
 
             if (week > lastWeek) {
                 year = startDate.year
