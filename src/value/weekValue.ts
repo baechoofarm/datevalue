@@ -38,9 +38,8 @@ export class WeekValue extends MonthValue {
             }
         }
 
-        const start = WeekValue.startDateOfDateWeek(startDate);
-        const first = WeekValue.startDateOfDateWeek(year, month, 1, startDate.startDayOfWeek);
-        const w = Math.ceil(start.dateDiff(first) / 7) + 1;
+        const firstDate = WeekValue.startDateOfDateWeek(year, month, 1, startDate.startDayOfWeek);
+        const w = Math.ceil((startDate.dateDiff(firstDate) + 7) / 7);
 
         this._y = year;
         this._m = month;
@@ -154,7 +153,7 @@ export class WeekValue extends MonthValue {
 
     private static _dateArgs4W(v1: DateValue | number, v2?: number, v3?: number, v4?: Day): [number, number, number, Day] {
         if (typeof v1 === "number" && typeof v2 === "number" && typeof v3 === "number") {
-            return [v1, v2, v3, v4 as Day];
+            return [v1, v2, v3, (v4 as Day) ?? Day.SUN];
         } else {
             const {year, month, date, startDayOfWeek} = (v1 as DateValue);
             return [year, month, date, startDayOfWeek];
@@ -163,7 +162,7 @@ export class WeekValue extends MonthValue {
 
     private static _monthArgs3W(v1: MonthValue | number, v2?: number, v3?: Day): [number, number, Day] {
         if (typeof v1 === "number" && typeof v2 === "number") {
-            return [v1, v2, v3 as Day];
+            return [v1, v2, (v3 as Day) ?? Day.SUN];
         } else {
             const {year, month, startDayOfWeek} = (v1 as MonthValue);
             return [year, month, startDayOfWeek];
@@ -175,11 +174,11 @@ export class WeekValue extends MonthValue {
     static fromDate(v1: DateValue | number, v2?: number, v3?: number, v4?: Day): WeekValue {
         const [year, month, date, startDayOfWeek] = WeekValue._dateArgs4W(v1, v2, v3, v4);
         const startDate = WeekValue.startDateOfDateWeek(year, month, date, startDayOfWeek);
-        const firstDate = WeekValue.startDateOfDateWeek(year, month, 1, startDayOfWeek);
+        const firstDate = WeekValue.startDateOfDateWeek(startDate.year, startDate.month, 1, startDayOfWeek);
 
-        const week = Math.floor(startDate.dateDiff(firstDate) / 7) + 1;
+        const week = Math.floor((startDate.dateDiff(firstDate) + 7) / 7);
 
-        return new WeekValue(year, month, week, startDayOfWeek);
+        return new WeekValue(startDate.year, startDate.month, week, startDayOfWeek);
     }
 
     static weekDiff(value1: WeekValue, value2: WeekValue): number
@@ -193,7 +192,7 @@ export class WeekValue extends MonthValue {
 
         const dateDiff = DateValue.dateDiff(start, end);
 
-        return Math.ceil(dateDiff / 7);
+        return Math.ceil((dateDiff + 7) / 7) - 1;
     }
 
     static startDateOfWeek(value: WeekValue): DateValue
