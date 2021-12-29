@@ -102,7 +102,11 @@ export class WeekValue extends MonthValue {
         return WeekValue.endDateOfWeek(this);
     }
 
-    static _weekArgs4(v1: WeekValue | number, v2?: number, v3?: number, v4?: Day): [number, number, number, Day] {
+    get dateListOfWeek() {
+        return WeekValue.dateListOfWeek(this);
+    }
+
+    protected static _weekArgs4(v1: WeekValue | number, v2?: number, v3?: number, v4?: Day): [number, number, number, Day] {
         if (typeof v1 === "number" && typeof v2 === "number" && typeof v3 === "number") {
             return [v1, v2, v3, (v4 as Day) ?? Day.SUN];
         } else {
@@ -111,7 +115,7 @@ export class WeekValue extends MonthValue {
         }
     }
 
-    static _weekArgs6(v1: WeekValue | number, v2: WeekValue | number, v3?: number, v4?: WeekValue | number, v5?: number, v6?: number): [number, number, number, Day, number, number, number, Day] {
+    protected static _weekArgs6(v1: WeekValue | number, v2: WeekValue | number, v3?: number, v4?: WeekValue | number, v5?: number, v6?: number): [number, number, number, Day, number, number, number, Day] {
         if (typeof v1 === "number" && typeof v2 === "number" && typeof v3 === "number") {
             if (typeof v4 === "number" && typeof v5 === "number" && typeof v6 === "number") {
                 return [v1, v2, v3, Day.SUN, v4, v5, v6, Day.SUN];
@@ -131,7 +135,7 @@ export class WeekValue extends MonthValue {
         }
     }
 
-    static _weekArgs8(v1: WeekValue | number, v2: WeekValue | number, v3?: number, v4?: Day | number, v5?: WeekValue | Day | number, v6?: number, v7?: number, v8?: Day): [number, number, number, Day, number, number, number, Day] {
+    protected static _weekArgs8(v1: WeekValue | number, v2: WeekValue | number, v3?: number, v4?: Day | number, v5?: WeekValue | Day | number, v6?: number, v7?: number, v8?: Day): [number, number, number, Day, number, number, number, Day] {
         if (typeof v1 === "number" && typeof v2 === "number" && typeof v3 === "number") {
             if (typeof v5 === "number" && typeof v6 === "number" && typeof v7 === "number") {
                 return [v1, v2, v3, v4 as Day, v5, v6, v7, v8 as Day];
@@ -151,7 +155,7 @@ export class WeekValue extends MonthValue {
         }
     }
 
-    private static _dateArgs4W(v1: DateValue | number, v2?: number, v3?: number, v4?: Day): [number, number, number, Day] {
+    protected static _dateArgs4W(v1: DateValue | number, v2?: number, v3?: number, v4?: Day): [number, number, number, Day] {
         if (typeof v1 === "number" && typeof v2 === "number" && typeof v3 === "number") {
             return [v1, v2, v3, (v4 as Day) ?? Day.SUN];
         } else {
@@ -160,7 +164,7 @@ export class WeekValue extends MonthValue {
         }
     }
 
-    private static _monthArgs3W(v1: MonthValue | number, v2?: number, v3?: Day): [number, number, Day] {
+    protected static _monthArgs3W(v1: MonthValue | number, v2?: number, v3?: Day): [number, number, Day] {
         if (typeof v1 === "number" && typeof v2 === "number") {
             return [v1, v2, (v3 as Day) ?? Day.SUN];
         } else {
@@ -275,5 +279,19 @@ export class WeekValue extends MonthValue {
             weeks.push(new WeekValue(year, month, w));
         }
         return weeks;
+    }
+
+    static dateListOfWeek(value: WeekValue): DateValue[]
+    static dateListOfWeek(year: number, month: number, week: number, startDayOfWeek?: Day): DateValue[]
+    static dateListOfWeek(v1: WeekValue | number, v2?: number, v3?: number, v4?: Day): DateValue[] {
+        const [y, m, w, sdow] = WeekValue._weekArgs4(v1, v2, v3, v4);
+        const start = WeekValue.startDateOfWeek(y, m, w, sdow);
+
+        const dates: DateValue[] = [start];
+
+        for (let i = 1; i < 7; i++) {
+            dates.push(new DateValue(start.y, start.m, start.d + i));
+        }
+        return dates;
     }
 }
