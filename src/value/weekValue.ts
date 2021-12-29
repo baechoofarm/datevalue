@@ -251,9 +251,9 @@ export class WeekValue extends MonthValue {
         return Math.ceil(dayCount / 7);
     }
 
-    static monthWeekList(value: MonthValue): WeekValue[]
-    static monthWeekList(year: number, month: number, startDayOfWeek?: Day): WeekValue[]
-    static monthWeekList(v1: MonthValue | number, v2?: number, v3?: Day): WeekValue[] {
+    static weekListOfMonth(value: MonthValue): WeekValue[]
+    static weekListOfMonth(year: number, month: number, startDayOfWeek?: Day): WeekValue[]
+    static weekListOfMonth(v1: MonthValue | number, v2?: number, v3?: Day): WeekValue[] {
         const [year, month, startDayOfWeek] = WeekValue._monthArgs3W(v1, v2, v3);
         const last = WeekValue.lastWeekOfMonth(year, month, startDayOfWeek);
         const weeks: WeekValue[] = [];
