@@ -155,6 +155,10 @@ export class YearValue {
         return new YearValue(obj.getFullYear());
     }
 
+    static fromDateString(date: string): YearValue {
+        return new YearValue(new Date(date).getFullYear());
+    }
+
     static clampYear(target: YearValue, min: YearValue, max: YearValue): YearValue
     static clampYear(target: YearValue, minYear: number, max: YearValue): YearValue
     static clampYear(target: YearValue, min: YearValue, maxYear: number): YearValue

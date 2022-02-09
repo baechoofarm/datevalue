@@ -226,6 +226,11 @@ export class DateValue extends MonthValue {
         return new DateValue(obj.getFullYear(), obj.getMonth(), obj.getDate());
     }
 
+    static fromDateString(date: string): DateValue {
+        const d = new Date(date);
+        return new DateValue(d.getFullYear(), d.getMonth(), d.getDate());
+    }
+
     private static _dateArgs6(v1: DateValue | number, v2: DateValue | number, v3?: number, v4?: DateValue | number, v5?: number, v6?: number): [DateValue, DateValue] {
         if (typeof v1 === "number" && typeof v2 === "number" && typeof v3 === "number") {
             return [
